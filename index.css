@@ -3,7 +3,6 @@ body, div, input, select, button {
     margin: 0
 }
 #objectlist_wrapper{
-    padding-top: 20px;
     padding-left: 20px;
     height: 100%;
     overflow: scroll;
