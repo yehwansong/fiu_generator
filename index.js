@@ -5,7 +5,7 @@ var counter
 // var theme_counter = 0
 window.onload = function () {
 var a_counter = 0
-    getGoogleFonts('AIzaSyAOES8EmKhuJEnsn9kS1XKBpxxp-TgN8Jc');
+    getGoogleFonts('AIzaSyDqXVt_H3XqKNj9Uyqu-G0OVe0FgS4np8w');
     fontlist = document.getElementsByClassName('fontlist')
 
     function getGoogleFonts(apiKey){
