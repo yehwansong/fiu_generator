@@ -41,8 +41,9 @@ var a_counter = 0
         var selected_color = 'salmon'
         var selected_variant = 'regular'
         var selected_ratio = '100-191'
-        var selected_content = 'word^shining'
+        var selected_content = 'Shining'
         var selected_content_type = 'word'
+        var selected_imagesize = '600'
 
         $('.wrapper>div').click(function(){
             var k = $(this).attr('id').split('_')[0]
@@ -55,6 +56,9 @@ var a_counter = 0
             selected_variant =String($(this).attr('id').split('_')[1])}
             if(k === 'ratio'){
             selected_ratio =String($(this).attr('id').split('_')[1])}
+            if(k === 'imagesize'){
+            selected_imagesize =String($(this).attr('id').split('_')[1])
+            console.log(selected_imagesize)}
             if(k === 'content'){
                 if(String($(this).attr('id').split('_')[1]) === 'words'){
                     selected_content_string = $(this).attr('id').split('_')[2]
@@ -530,55 +534,119 @@ function hasClass( target, className ) {
         var svg_wholewrapper = document.getElementsByClassName("svg_wholewrapper")
         console.log(a_counter)
         // for (var i = svg_wrapper.length - 1; i >= 0; i--) {
+            // if(1-1)
             var i_top = svg_wrapper[a_counter].getBoundingClientRect().top + window.scrollY;
             var i_left = svg_wrapper[a_counter].getBoundingClientRect().left + window.scrollX;
             if(svg_wholewrapper[a_counter].getElementsByTagName('a').length){
                 var a = svg_wholewrapper[a_counter].getElementsByTagName('a')[0]
-                if( selected_ratio === '1-1'){
-                    html2canvas(svg_wrapper[a_counter], {
-                        x:i_left,
-                        y:i_top,
-                        width: 350,
-                        height: 350
-                    }).then(function(canvas, i) {
-                        a.href = canvas.toDataURL("image/png");
-                        a.download = a.id;
-                        a_counter++
-                        if(a_counter < svg_wrapper.length){
-                            divtoimage(a_counter)
-                        }
-                    });
-                }else if( selected_ratio === '3-4'){
-                    html2canvas(svg_wrapper[a_counter], {
-                        x:i_left,
-                        y:i_top,
-                        width: 350,
-                        height: 262.5
-                    }).then(function(canvas, i) {
-                        a.href = canvas.toDataURL("image/png");
-                        a.download = a.id;
-                        a_counter++
-                        if(a_counter < svg_wrapper.length){
-                            divtoimage(a_counter)
-                        }
-                    });
+
+
+                if(selected_imagesize === '600'){
+                    if( selected_ratio === '1-1'){
+                        svg_wrapper[a_counter].style.transform = 'scale(0.85715)'
+                        html2canvas(svg_wrapper[a_counter], {
+                            x:i_left,
+                            y:i_top,
+                            width: 300,
+                            height: 300
+                        }).then(function(canvas, i) {
+                            a.href = canvas.toDataURL("image/png");
+                            a.download = a.id;
+                            a_counter++
+                            if(a_counter < svg_wrapper.length){
+                                divtoimage(a_counter)
+                            }
+                        });
+                    }else if( selected_ratio === '3-4'){
+                        svg_wrapper[a_counter].style.transform = 'scale(1.1429)'
+                        html2canvas(svg_wrapper[a_counter], {
+                            x:i_left,
+                            y:i_top,
+                            width: 400,
+                            height: 300
+                        }).then(function(canvas, i) {
+                            a.href = canvas.toDataURL("image/png");
+                            a.download = a.id;
+                            a_counter++
+                            if(a_counter < svg_wrapper.length){
+                                divtoimage(a_counter)
+                            }
+                        });
+                    }else{
+                        svg_wrapper[a_counter].style.transform = 'scale(1.2)'
+                        html2canvas(svg_wrapper[a_counter], {
+                            x:i_left,
+                            y:i_top,
+                            width: 573,
+                            height: 300
+                        }).then(function(canvas, i) {
+                            console.log(a_counter)
+                            // var a = svg_wholewrapper[counter].getElementsByTagName('a')[0]
+                            a.href = canvas.toDataURL("image/png");
+                            a.download = a.id;
+                            a_counter++
+                            if(a_counter < svg_wrapper.length){
+                                divtoimage(a_counter)
+                            }
+                        });
+                    }
                 }else{
-                    html2canvas(svg_wrapper[a_counter], {
-                        x:i_left,
-                        y:i_top,
-                        width: 477.5,
-                        height: 250
-                    }).then(function(canvas, i) {
-                        console.log(a_counter)
-                        // var a = svg_wholewrapper[counter].getElementsByTagName('a')[0]
-                        a.href = canvas.toDataURL("image/png");
-                        a.download = a.id;
-                        a_counter++
-                        if(a_counter < svg_wrapper.length){
-                            divtoimage(a_counter)
-                        }
-                    });
+                    if( selected_ratio === '1-1'){
+                        svg_wrapper[a_counter].style.transform = 'scale(0.4286)'
+                        html2canvas(svg_wrapper[a_counter], {
+                            x:i_left,
+                            y:i_top,
+                            width: 150,
+                            height: 150
+                        }).then(function(canvas, i) {
+                            a.href = canvas.toDataURL("image/png");
+                            a.download = a.id;
+                            a_counter++
+                            if(a_counter < svg_wrapper.length){
+                                divtoimage(a_counter)
+                            }
+                        });
+                    }else if( selected_ratio === '3-4'){
+                        svg_wrapper[a_counter].style.transform = 'scale(0.5714)'
+                        html2canvas(svg_wrapper[a_counter], {
+                            x:i_left,
+                            y:i_top,
+                            width: 200,
+                            height: 150
+                        }).then(function(canvas, i) {
+                            a.href = canvas.toDataURL("image/png");
+                            a.download = a.id;
+                            a_counter++
+                            if(a_counter < svg_wrapper.length){
+                                divtoimage(a_counter)
+                            }
+                        });
+                    }else{
+                        svg_wrapper[a_counter].style.transform = 'scale(0.6)'
+                        html2canvas(svg_wrapper[a_counter], {
+                            x:i_left,
+                            y:i_top,
+                            width: 286.5,
+                            height: 150
+                        }).then(function(canvas, i) {
+                            console.log(a_counter)
+                            // var a = svg_wholewrapper[counter].getElementsByTagName('a')[0]
+                            a.href = canvas.toDataURL("image/png");
+                            a.download = a.id;
+                            a_counter++
+                            if(a_counter < svg_wrapper.length){
+                                divtoimage(a_counter)
+                            }
+                        });
+                    }
                 }
+
+
+
+
+
+
+                        svg_wrapper[a_counter].style.transform="scale(1)"
             }
         // }
     }

@@ -53,6 +53,7 @@ svg{
     width: calc(100vw - 600px);
     position: absolute;
     top: 0;
+    transform-origin: left top
 }
 .svg_wholewrapper{
     padding-right: 50px;
@@ -88,20 +89,40 @@ svg{
     top: 260px;
 }
 #ratio_wrapper{
+    z-index: 100000;
     height: 95px;
-    top: 355px;
+    top: auto;
+    bottom: 100px;
+    background: #808080;
+    overflow: visible;
+}
+#imagesize_wrapper{
+    background: #808080;
+    bottom: 0;
+    height: 100px;
+    top: auto;
 }
 #content_wrapper{
-	height:100vh;
-    top: 450px;
+    height: 100vh;
+    top: 355px;
 }
+#g_wrapper{
+    top: auto;
+    bottom: 0;
+
+    /* width: 120px; */
+    height: 30px;
+    width: 220px;
+    left: 320px;
+    position: fixed;
+    height: 195px;
+    background: #f1f1f1}
 #generate{
-    z-index: 1000000;
-    top: 850px;
+    left: 50px;
+    position: absolute;
+    top: 35px;
     width: 120px;
     height: 30px;
-    left: 100px;
-    position: fixed;
     font-size: 17px;
     border-radius: 3px;
 }
@@ -140,19 +161,30 @@ svg{
     line-height: 1;
     text-align: center;
 }
-
+#ratio_wrapper div{
+    padding-top: 5px;
+    text-align: center;
+    font-size: 25px;
+}
 #ratio_1-1{
-	width: 50px
+	width: 50px;
 }
 #ratio_3-4{
-	width: 66.7px
+	width: 66.7px;
 }
 #ratio_100-191{
-	width: 95px
+	width: 95px;
 }
-
-
-
+#ratio_1-1 div,
+#ratio_3-4 div,
+#ratio_100-191 div{
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+}
+#imagesize_wrapper,
+#ratio_wrapper{
+    background: #f1f1f1}
 
 .character{
     font-size: 50px;
@@ -177,6 +209,9 @@ svg{
     font-size: 10px;
     text-align: center;
     line-height: 12.5px;
+}
+.sentence span{
+    display: block;
 }
 
 
@@ -226,8 +261,18 @@ svg{
     transform: translateY(-50%);
 }
 
-
-
+#imagesize_300{
+    font-size: 20px;
+    width: 40px;
+    height: 25px !important;
+    line-height: 80px;
+}
+#imagesize_600{
+    font-size: 20px;
+    /* width: 40px; */
+    /* height: 25px !important; */
+    line-height: 80px;
+}
 
 
 .svg_wrapperinner,
