@@ -1,0 +1,99 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>google-font-to-svg-path</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="index.css" />
+        <script
+              src="https://code.jquery.com/jquery-3.4.1.min.js"
+              integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+              crossorigin="anonymous"></script>
+
+  <script src="https://maker.js.org/target/js/browser.maker.js" type="text/javascript"></script>
+  <script src="https://pomax.github.io/bezierjs/bezier.js" type="text/javascript"></script>
+  <script src="html2canvas.min.js" type="text/javascript"></script>
+  <script src="opentype.js" type="text/javascript"></script>
+  <script src="index.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+	<div id="objectlist_wrapper">
+		<button id="selectall">select all</button>
+	</div>
+	<div id="theme_wrapper" class="wrapper">
+		<span class="title">theme</span>
+		<div id='theme_none' class="selected"></div>
+		<div id='theme_line'>
+			<div></div>
+		</div>
+	</div>
+	<div id="color_wrapper" class="wrapper">
+		<span class="title">color</span>
+		<div id="color_salmon" class="selected"></div>
+		<div id="color_blue"></div>
+		<div id="color_gray"></div>
+		<div id="color_salmoninv"></div>
+		<div id="color_blueinv"></div>
+		<div id="color_grayinv"></div>
+	</div>
+	<div id="variant_wrapper" class="wrapper">
+		<span class="title">variant</span>
+		<div id="variant_regular" class="selected">K</div>
+		<div id="variant_italic">K</div>
+	</div>
+	<div id="ratio_wrapper" class="wrapper">
+		<span class="title">ratio</span>
+		<div id="ratio_100-191" class="selected">1:1.91</div>
+		<div id="ratio_3-4">3:4</div>
+		<div id="ratio_1-1">1:1</div>
+	</div>
+	<div id="content_wrapper" class="wrapper">
+		<span class="title">Content</span>
+		<span class="title">Character</span>
+		<div class="character" id="content_character_0">K</div>
+		<div class="character" id="content_character_1">J</div>
+		<div class="character" id="content_character_2">L</div>
+		
+		<span class="title">Word</span>
+		<div class="word selected" id="content_word_3">Shining</div>
+		<div class="word" id="content_word_4">Flying</div>
+		<div class="word" id="content_word_5">Night</div>
+
+		<span class="title">Words</span>
+		<div class="words" id="content_words_6">
+			<span class="top">Blue</span>
+			<span class="bottom">Evening</span>
+		</div>
+		<div class="words" id="content_words_8">
+			<span class="top">Indeed</span>
+			<span class="bottom">Sublime</span>
+		</div>
+		<div class="words" id="content_words_10">
+			<span class="top">Almost</span>
+			<span class="bottom">12345</span>
+		</div>
+		<span class="title">Sentence</span>
+		<div class="sentence" id="content_sentence_11">
+			<span>The spectacle</span>
+			<span>before us </span>
+			<span>was indeed </span>
+			<span>sublime.</span>
+		</div>
+		<div class="sentence" id="content_sentence_12">
+			<span>The face </span>
+			<span>of the </span>
+			<span>moon was </span>
+			<span>in shadow.</span>
+		</div>
+		<div class="sentence" id="content_sentence_13">
+			She stared<br>through the window at the stars.
+		</div>
+	</div>
+	<button id="generate">Generate!</button>
+	<div id="output_wrapper"></div>
+</body>
+</html>
