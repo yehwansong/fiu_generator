@@ -21,71 +21,82 @@
 </head>
 
 <body>
-	<div id="objectlist_wrapper">
-		<span class="title">Fonts</span>
-		<button id="selectall">select all</button>
-	</div>
-	<div id="theme_wrapper" class="wrapper">
-		<span class="title">theme</span>
-		<div id='theme_none' class="selected"></div>
-		<div id='theme_line'>
-			<div></div>
+	<div id="wrapper_wrapper">
+		<div id="objectlist_wrapper">
+			<span class="title">Fonts</span>
+			<button id="selectall">select all</button>
+			<select id="font_languages">
+				<option value="all">All languages</option>
+			</select>
 		</div>
-	</div>
-	<div id="color_wrapper" class="wrapper">
-		<span class="title">color</span>
-		<div id="color_salmon" class="selected"></div>
-		<div id="color_blue"></div>
-		<div id="color_gray"></div>
-		<div id="color_salmoninv"></div>
-		<div id="color_blueinv"></div>
-		<div id="color_grayinv"></div>
-	</div>
-	<div id="variant_wrapper" class="wrapper">
-		<span class="title">variant</span>
-		<div id="variant_regular" class="selected">K</div>
-		<div id="variant_italic">K</div>
-	</div>
-	<div id="content_wrapper" class="wrapper">
-		<span class="title">Content</span>
-		<span class="title">Character</span>
-		<div class="character" id="content_character_0">K</div>
-		<div class="character" id="content_character_1">J</div>
-		<div class="character" id="content_character_2">L</div>
-		
-		<span class="title">Word</span>
-		<div class="word selected" id="content_word_3">Shining</div>
-		<div class="word" id="content_word_4">Flying</div>
-		<div class="word" id="content_word_5">Tea</div>
+		<div id="theme_wrapper" class="wrapper">
+			<span class="title">theme</span>
+			<div id='theme_none' class="selected"></div>
+			<div id='theme_line'>
+				<div></div>
+			</div>
+		</div>
+		<div id="color_wrapper" class="wrapper">
+			<span class="title">color</span>
+			<div id="color_salmon" class="selected"></div>
+			<div id="color_blue"></div>
+			<div id="color_gray"></div>
+			<div id="color_salmoninv"></div>
+			<div id="color_blueinv"></div>
+			<div id="color_grayinv"></div>
+		</div>
+		<div id="variant_wrapper" class="wrapper">
+			<span class="title">variant</span>
+			<div id="variant_regular" class="selected">K</div>
+			<div id="variant_italic">K</div>
+		</div>
+		<div id="content_wrapper" class="wrapper">
+			<span class="title">Content</span>
+			<span class="title">Character</span>
+			<div class="character" id="content_character_0">K</div>
+			<div class="character" id="content_character_1">J</div>
+			<div class="character" id="content_character_2">L</div>
+			
+			<span class="title">Word</span>
+			<div class="word selected" id="content_word_3">Shining</div>
+			<div class="word" id="content_word_4">Flying</div>
+			<div class="word" id="content_word_5">Tea</div>
 
-		<span class="title">Words</span>
-		<div class="words" id="content_words_6">
-			<span class="top">Blue</span>
-			<span class="bottom">Evening</span>
+			<span class="title">Words</span>
+			<div class="words" id="content_words_6">
+				<span class="top">Blue</span>
+				<span class="bottom">Evening</span>
+			</div>
+			<div class="words" id="content_words_8">
+				<span class="top">Indeed</span>
+				<span class="bottom">Sublime</span>
+			</div>
+			<div class="words" id="content_words_10">
+				<span class="top">Almost</span>
+				<span class="bottom">12345</span>
+			</div>
+			<span class="title">Sentence</span>
+			<div class="sentence" id="content_sentence_11">
+				<span>The spectacle</span>
+				<span>before us </span>
+				<span>was indeed </span>
+				<span>sublime.</span>
+			</div>
+			<div class="sentence" id="content_sentence_12">
+				<span>The face </span>
+				<span>of the </span>
+				<span>moon was </span>
+				<span>in shadow.</span>
+			</div>
+			<div class="sentence" id="content_sentence_13">
+				She stared<br>through the window at the stars.
+			</div>
 		</div>
-		<div class="words" id="content_words_8">
-			<span class="top">Indeed</span>
-			<span class="bottom">Sublime</span>
-		</div>
-		<div class="words" id="content_words_10">
-			<span class="top">Almost</span>
-			<span class="bottom">12345</span>
-		</div>
-		<span class="title">Sentence</span>
-		<div class="sentence" id="content_sentence_11">
-			<span>The spectacle</span>
-			<span>before us </span>
-			<span>was indeed </span>
-			<span>sublime.</span>
-		</div>
-		<div class="sentence" id="content_sentence_12">
-			<span>The face </span>
-			<span>of the </span>
-			<span>moon was </span>
-			<span>in shadow.</span>
-		</div>
-		<div class="sentence" id="content_sentence_13">
-			She stared<br>through the window at the stars.
+		<div id="lineheight_wrapper" class="wrapper">
+			<span class="title">Line Height</span>
+			<div id="lineheight_11" class="selected">The spectacle<br>before us</div>
+			<div id="lineheight_12">The<br>spectacle<br>before us</div>
+			<div id="lineheight_14">The<br>spectacle<br>before us</div>
 		</div>
 	</div>
 	<div id="ratio_wrapper" class="wrapper">

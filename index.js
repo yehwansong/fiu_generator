@@ -2,6 +2,8 @@ var makerjs = require('makerjs');
 var fonts
 var fontlist 
 var counter
+var language_array=[]
+var multi_string
 // var theme_counter = 0
 window.onload = function () {
 var a_counter = 0
@@ -12,13 +14,39 @@ var a_counter = 0
         var xhr = new XMLHttpRequest();
         xhr.open('get', 'https://www.googleapis.com/webfonts/v1/webfonts?key=' + apiKey, true);
         xhr.onloadend = function () {
-            objectarray(JSON.parse(xhr.responseText).items)
+            objectarray(JSON.parse(xhr.responseText).items, fonts)
             fonts = JSON.parse(xhr.responseText);
             console.log(fonts)
         };
         xhr.send();
     };
-
+var multi_lang_array = [
+    ["sinhala",  'එය කාලය පිළිබඳ ප්‍රශ්නයක් පමණක් විය.','අආඇ'],
+    ["hebrew",  'גלים התנפצו אל תוך הערב הכחול.','שת₪' ],
+    ["greek",  'Κι έπειτα ήρθε η νύχτα του πρώτου διάττοντα αστέρα.','ΑΒΓ' ],
+    ["greek-ext",  'Η ηχογραφημένη φωνή ακούστηκε βραχνή στο ηχείο πάνω από την πόρτα.','ΑΒΓ' ],
+    ["cyrillic",'В вечернем свете волны отчаянно бились о берег.','АБВ'],
+    ["cyrillic-ext",'З гучномовця над дверима скрипів записаний голос.','АБВ'],
+    ["vietnamese",  'Bầu trời trong xanh thăm thẳm, không một gợn mây.','âbc' ],
+    ["devanagari",  'अंतरिक्ष यान से दूर नीचे पृथ्वी शानदार ढंग से जगमगा रही थी ।','आईऊ'],
+    ["arabic",'بطابع أحمر ارتسمت صورة ظليّة لحدود الجناح المسننة.' ,'صشس'],
+    ["khmer",  'ផ្ទៃព្រះច័ន្ទត្រូវបាំងបិទដោយពពក','ឃងច' ],
+    ["tamil", 'அந்திமாலையில், அலைகள் வேகமாக வீசத் தொடங்கின.','க்ங்ச்'  ],
+    ["thai", 'การเดินทางขากลับคงจะเหงา','กขค'  ],
+    ["bengali",'আমাদের প্রাই বোঝার আগেই আমরা মাটি ছেড়ে দূরে চলে এসেছিলাম৷','অআই'  ],
+    ["gujarati",  'અમને તેની જાણ થાય તે પહેલાં જ, અમે જમીન છોડી દીધી હતી.','અઆઇ'],
+    ["oriya", 'ଏହା କେବଳ ଏକ ସମୟ କଥା ହିଁ ଥିଲା.','ଅଆଇ'  ],
+    ["malayalam", 'തുറമുഖം വിട്ട് മൂന്ന് മണിക്കൂറിനുള്ളിൽ കപ്പലിനെ മൂടൽ മഞ്ഞ് പൊതിഞ്ഞു.','അആഇ' ],
+    ["gurmukhi",  'ਉਹਨਾਂ ਦੇ ਸਾਰੇ ਸਾਜ਼ੋ-ਸਾਮਾਨ ਅਤੇ ਉਪਕਰਨ ਹਾਲੇ ਵੀ, ਕਿਸੇ ਨਾ ਕਿਸੇ ਰੂਪ ਵਿੱਚ ਕਿਰਿਆਸ਼ੀਲ ਹਨ।','ਆਈਊ' ],
+    ["kannada", 'ಇದು ಕೇವಲ ಸಮಯದ ಪ್ರಶ್ನೆಯಾಗಿದೆ.','ಅಆಇ'  ],
+    ["telugu",  'ఆ రాత్రి మొదటిసారిగా ఒక నక్షత్రం నేలరాలింది.','అఆఇ' ],
+    ["korean", '구름 한 점 없는 푸른 하늘이었다.','가나다'  ],
+    ["japanese",  '彼らの機器や装置はすべて生命体だ。','一二三' ],
+    ["chinese-simplified",'红色火光映出锯齿形机翼的轮廓。','一二三'   ],
+    ["chinese-hongkong",'他們所有的設備和儀器彷彿都是有生命的。','一二三'  ],
+    ["chinese-traditional",'他們所有的設備和儀器彷彿都是有生命的。 ','一二三' ],
+    ["myanmar", 'သူတို့ရဲ့ စက်ပစ္စည်းတွေ၊ ကိရိယာတွေ အားလုံး အသက်ရှင်ကြတယ်။','၍၎၏'  ]
+]
 
     function objectarray(FontsInUseArray){
         for (var i =  0; i < FontsInUseArray.length; i++) {
@@ -31,11 +59,59 @@ var a_counter = 0
             FontsInUseObject.innerHTML += FontsInUseArray[i].family
             FontsInUseObject.setAttribute("id",'index_'+i)
             FontsInUseObject.setAttribute("class",'fontlist')
-            document.getElementById("objectlist_wrapper").appendChild(FontsInUseObject); 
+            document.getElementById("objectlist_wrapper").appendChild(FontsInUseObject);
+            for (var j = FontsInUseArray[i].subsets.length - 1; j >= 0; j--) {
+                if (language_array.indexOf(FontsInUseArray[i].subsets[j]) === -1){
+                    if (FontsInUseArray[i].subsets[j] === 'latin' || FontsInUseArray[i].subsets[j] === 'latin-ext'){
+                    }else{
+                        language_array.push(FontsInUseArray[i].subsets[j]);
+                    }
+                } 
+            }
+            if(i==FontsInUseArray.length-1){
+                for (var j = language_array.length - 1; j >= 0; j--) {
+                    var multi_select = document.createElement("option");
+                    multi_select.setAttribute("value", language_array[j]);
+                    var t = document.createTextNode(language_array[j]);
+                    multi_select.appendChild(t);
+                    document.getElementById("font_languages").appendChild(multi_select);
+                }
+            }
+        }
+    } 
+
+
+    $('#font_languages').change(function(){
+        $('#objectlist_wrapper input[type="checkbox"]').prop('checked', false);
+        language_setting($(this).find("option:selected").attr('value'))
+    });
+    function language_setting(lang){
+        console.log(fonts.items)
+        for (var i = multi_lang_array.length - 1; i >= 0; i--) {
+            if(multi_lang_array[i][0] === lang ){
+
+                var multi_character = multi_lang_array[i][1].slice(0,1)
+                var multi_word = multi_lang_array[i][2]
+                var multi_sentence = multi_lang_array[i][1]
+
+                $('#content_character_0').html(multi_character)
+                $('#content_word_3').html(multi_word) 
+                $('#content_words_6 .top').html(multi_word) 
+                $('#content_words_8 .bottom').html(multi_word) 
+                $('#content_words_10 .top').html(multi_word) 
+                $('#content_sentence_11').html(multi_sentence)
+
+                $('.fontlist').hide()
+                for (var i = fonts.items.length - 1; i >= 0; i--) {
+                    if(fonts.items[i].subsets.includes(lang)){
+                        $('#index_'+i).show()
+                    }
+                }
+            }else{
+                // return false
+            }
         }
     }
-
-
 
         var selected_theme = 'none'
         var selected_color = 'salmon'
@@ -44,6 +120,8 @@ var a_counter = 0
         var selected_content = 'Shining'
         var selected_content_type = 'word'
         var selected_imagesize = '600'
+        var selected_lineheight = '600'
+
 
         $('.wrapper>div').click(function(){
             var k = $(this).attr('id').split('_')[0]
@@ -60,19 +138,25 @@ var a_counter = 0
             selected_imagesize =String($(this).attr('id').split('_')[1])
             console.log(selected_imagesize)}
             if(k === 'content'){
+                    console.log('0')
                 if(String($(this).attr('id').split('_')[1]) === 'words'){
                     selected_content_string = $(this).attr('id').split('_')[2]
                     selected_content_string_etc = $(this).attr('id').split('_')[2]+1
-                }else if(selected_content_type === 'word'){
+                }else if(String($(this).attr('id').split('_')[1]) === 'word'){
                     selected_content_string = $(this).attr('id').split('_')[2]
-                }else if(selected_content_type === 'sentence'){
+                }else if(String($(this).attr('id').split('_')[1]) === 'sentence'){
+                    $('#lineheight_wrapper').css({'opacity':1})
+                    $('#lineheight_wrapper').css({'pointer-events':'auto'})
                     selected_content_string = $(this).attr('id').split('_')[2]
-                }else if(selected_content_type === 'character'){
+                }else if(String($(this).attr('id').split('_')[1]) === 'character'){
                     selected_content_string = $(this).attr('id').split('_')[2]
                 }
             }
             if(k === 'content'){
             selected_content_string =String($(this).attr('id').split('_')[1].split('^')[1])}
+            if(k === 'lineheight'){
+                selected_lineheight = Number(String($(this).attr('id').split('_')[1])/10);
+            }
 
             $('#'+k+'_wrapper>div').removeClass('selected')
             $(this).addClass('selected')
@@ -104,14 +188,14 @@ var a_counter = 0
                 }
             }
                 if( i == fontlist.length-1 && $('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
-                    create_style(apiUrl,family_array)
+                    create_style(apiUrl,family_array,selected_lineheight)
                 }
         }
     })
 
 // if sentence
-    function create_style(apiUrl,family_array){
-    console.log(apiUrl)
+    function create_style(apiUrl,family_array,selected_lineheight){
+    console.log(selected_lineheight)
         if(selected_variant === 'italic'){
             var clone_apiUrl = []
             clone_apiUrl.push('https://fonts.googleapis.com/css?family=');
@@ -148,8 +232,9 @@ var a_counter = 0
             style.innerHTML +='.output_elem_child{font-style:italic}'
         }
         for (var i = family_array.length - 1; i >= 0; i--) {
-            style.innerHTML +='#output_wrapper>div:nth-child('+(i+1)+')>div>div *{font-family:'+family_array[i]+'}'
+            style.innerHTML +='#output_wrapper>div:nth-child('+(i+1)+')>div>div *{font-family:'+family_array[i]+'; line-height:'+selected_lineheight+'}'
         }
+        console.log($('.output_elem_child'))
         document.getElementsByTagName('head')[0].appendChild(style);
     }
     function reset_size_sentence(elem){
