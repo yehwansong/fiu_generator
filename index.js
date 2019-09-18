@@ -120,7 +120,7 @@ var multi_lang_array = [
         var selected_content = 'Shining'
         var selected_content_type = 'word'
         var selected_imagesize = '600'
-        var selected_lineheight = '600'
+        var selected_lineheight = '1.2'
 
 
         $('.wrapper>div').click(function(){
@@ -241,7 +241,7 @@ var multi_lang_array = [
     var style = window.getComputedStyle(elem, null).getPropertyValue('font-size');
     var fontSize = parseFloat(style); 
 
-                console.log(elem.style.fontSize)
+    console.log(elem.style.fontSize)
     console.log(elem.offsetWidth)
         if( selected_ratio === '1-1'){
             if((elem.offsetWidth > 350) ||(elem.offsetHeight > 350)){
@@ -394,7 +394,7 @@ var multi_lang_array = [
         if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
             var output_elem_child = document.getElementsByClassName('output_elem_child')
             for (var i = output_elem_child.length - 1; i >= 0; i--) {
-                reset_size_sentence(output_elem_child[i])
+                // reset_size_sentence(output_elem_child[i])
             }
         }
                 if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
@@ -556,9 +556,9 @@ function reset_size(output){
         }
         theme(a_counter)
     }
-function hasClass( target, className ) {
-    return new RegExp('(\\s|^)' + className + '(\\s|$)').test(target.className);
-}
+    function hasClass( target, className ) {
+        return new RegExp('(\\s|^)' + className + '(\\s|$)').test(target.className);
+    }
 
     function theme(a_counter){
         if(selected_theme === 'none'){}else{
