@@ -394,7 +394,7 @@ var multi_lang_array = [
         if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
             var output_elem_child = document.getElementsByClassName('output_elem_child')
             for (var i = output_elem_child.length - 1; i >= 0; i--) {
-                // reset_size_sentence(output_elem_child[i])
+                reset_size_sentence(output_elem_child[i])
             }
         }
                 if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
