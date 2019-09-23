@@ -17,6 +17,10 @@ var a_counter = 0
             objectarray(JSON.parse(xhr.responseText).items, fonts)
             fonts = JSON.parse(xhr.responseText);
             console.log(fonts)
+                for (var i = fonts.items.length - 1; i >= 0; i--) {
+                    console.log(fonts.items[i].family)
+                    console.log(Object.keys(fonts.items[i].files))
+                }
         };
         xhr.send();
     };
@@ -47,7 +51,6 @@ var multi_lang_array = [
     ["chinese-traditional",'他們所有的設備和儀器彷彿都是有生命的。 ','一二三' ],
     ["myanmar", 'သူတို့ရဲ့ စက်ပစ္စည်းတွေ၊ ကိရိယာတွေ အားလုံး အသက်ရှင်ကြတယ်။','၍၎၏'  ]
 ]
-
     function objectarray(FontsInUseArray){
         for (var i =  0; i < FontsInUseArray.length; i++) {
             var FontsInUseObject = document.createElement("div");
@@ -76,6 +79,57 @@ var multi_lang_array = [
                     multi_select.appendChild(t);
                     document.getElementById("font_languages").appendChild(multi_select);
                 }
+                $('.objectlist').click(function(){
+                    var objectlist = document.getElementsByClassName('objectlist')
+                    var variant_list_array = [
+                                        '100',
+                                        '100italic',
+                                        '200',
+                                        '200italic',
+                                        '300',
+                                        '300italic',
+                                        'regular',
+                                        'italic',
+                                        '500',
+                                        '500italic',
+                                        '600',
+                                        '600italic',
+                                        '700',
+                                        '700italic',
+                                        '800',
+                                        '800italic',
+                                        '900',
+                                        '900italic',
+                                ]
+                    for (var i = objectlist.length - 1; i >= 0; i--) {
+                         if(objectlist[i].checked == true){
+                            selected_variant = 'regular'
+                            // init
+                            var index_num = objectlist[i].parentNode.id.split('_')[1]
+                            $('#variant_wrapper>div').css({opacity:'0.5'})
+                            $('#variant_wrapper>div').css({'pointer-events':'none'})
+                            $('#variant_wrapper>div').removeClass('selected')
+                            console.log(objectlist[i].parentNode.getAttribute('id'))
+
+                            //newval
+                            variant_list_array = variant_list_array.filter(value => Object.keys(fonts.items[index_num].files).includes(value))
+                         }
+                         if( i == 0){
+                            for (var i = variant_list_array.length - 1; i >= 0; i--) {
+                                $('#variant_'+variant_list_array[i]).css({opacity:'1'})
+                                $('#variant_'+variant_list_array[i]).css({'pointer-events':'auto'})
+                            }
+                         }
+                    }
+
+                    // if ($(this).is(':checked')) {
+                    //     selected_variant = 'regular'
+                    //     for (var i = variant_list_array.length - 1; i >= 0; i--) {
+                    //         $('#variant_'+variant_list_array[i]).css({opacity:'1'})
+                    //         $('#variant_'+variant_list_array[i]).css({'pointer-events':'auto'})
+                    //     }
+                    // }
+                })
             }
         }
     } 
@@ -86,7 +140,6 @@ var multi_lang_array = [
         language_setting($(this).find("option:selected").attr('value'))
     });
     function language_setting(lang){
-        console.log(fonts.items)
         for (var i = multi_lang_array.length - 1; i >= 0; i--) {
             if(multi_lang_array[i][0] === lang ){
 
@@ -107,8 +160,17 @@ var multi_lang_array = [
                         $('#index_'+i).show()
                     }
                 }
+            }else if(lang === 'all'){
+
+                $('.fontlist').show()
+                $('#content_character_0').html('K')
+                $('#content_word_3').html('Shining') 
+                $('#content_words_6 .top').html('Blue') 
+                $('#content_words_8 .bottom').html('Sublime') 
+                $('#content_words_10 .top').html('Almost') 
+                $('#content_sentence_11').html('The spectacle before us was indeed sublime')
             }else{
-                // return false
+
             }
         }
     }
@@ -135,10 +197,8 @@ var multi_lang_array = [
             if(k === 'ratio'){
             selected_ratio =String($(this).attr('id').split('_')[1])}
             if(k === 'imagesize'){
-            selected_imagesize =String($(this).attr('id').split('_')[1])
-            console.log(selected_imagesize)}
+            selected_imagesize =String($(this).attr('id').split('_')[1])}
             if(k === 'content'){
-                    console.log('0')
                 if(String($(this).attr('id').split('_')[1]) === 'words'){
                     selected_content_string = $(this).attr('id').split('_')[2]
                     selected_content_string_etc = $(this).attr('id').split('_')[2]+1
@@ -168,7 +228,7 @@ var multi_lang_array = [
 
         var apiUrl = [];
         var family_array = [];
-        apiUrl.push('https://fonts.googleapis.com/css?family=');
+        // apiUrl.push('https://fonts.googleapis.com/css?family=');
 
         for (var i = 0; i <  fontlist.length; i++) {
             if(fontlist[i].getElementsByClassName('objectlist')[0].checked){
@@ -181,8 +241,11 @@ var multi_lang_array = [
                 }else if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
                     load_type(undefined,fonts.items[i].family, $('#content_wrapper>.selected').html())
                     family_array.push(fonts.items[i].family);
-                    apiUrl.push(fonts.items[i].family.replace(/ /g, '+'));
-                    apiUrl.push('|');
+                    apiUrl.push(
+                        fonts.items[i].family.replace(/ /g, '+')+':'+selected_variant
+                        );
+                    // apiUrl.push(':');
+                    // apiUrl.push(selected_variant);
                 }else{
                 render(fontlist[i].id.split('_')[1], selected_variant, $('#content_wrapper>.selected').html())
                 }
@@ -195,32 +258,8 @@ var multi_lang_array = [
 
 // if sentence
     function create_style(apiUrl,family_array,selected_lineheight){
-    console.log(selected_lineheight)
-        if(selected_variant === 'italic'){
-            var clone_apiUrl = []
-            clone_apiUrl.push('https://fonts.googleapis.com/css?family=');
-            var apiUrllen = apiUrl.length
-            for (var i = 1; i < apiUrllen; i++) {
-                clone_apiUrl.push(apiUrl[i])
-                clone_apiUrl.push(':i')
-                if( i == apiUrl.length-1){
-                    clone_apiUrl.pop();
-                    clone_apiUrl.pop();
-                    clone_apiUrl.push('&display=swap');
-                    var clone_url = clone_apiUrl.join('');
-                    var clone_fontlink = document.createElement('link'); 
-                    clone_fontlink.href = clone_url;
-                    clone_fontlink.rel = "stylesheet"; 
-                    head = document.head || document.getElementsByTagName('head')[0],
-                    head.appendChild(clone_fontlink);
-                    console.log(clone_apiUrl)
-                }
-            } 
-        }
-        apiUrl.pop();
-        apiUrl.push('&display=swap');
-        console.log(family_array)
-        var url = apiUrl.join('');
+        var joined = apiUrl.join('|')
+        var url = 'https://fonts.googleapis.com/css?family=' + joined
         var fontlink = document.createElement('link'); 
         fontlink.href = url;
         fontlink.rel = "stylesheet"; 
@@ -228,21 +267,25 @@ var multi_lang_array = [
         head.appendChild(fontlink);
 
         var style = document.createElement('style');
-        if(selected_variant === 'italic'){
-            style.innerHTML +='.output_elem_child{font-style:italic}'
+        if(selected_variant.includes('italic')){
+            var weight = selected_variant.split('i')[0]
+            if(weight){
+                style.innerHTML +='.output_elem_child{font-style:italic; font-weight:'+weight+'}'
+            }
+        }else{
+            var weight = selected_variant
+            if(weight === 'regular'){}else{
+                style.innerHTML +='.output_elem_child{font-style:normal; font-weight:'+weight+'}'
+            } 
         }
         for (var i = family_array.length - 1; i >= 0; i--) {
             style.innerHTML +='#output_wrapper>div:nth-child('+(i+1)+')>div>div *{font-family:'+family_array[i]+'; line-height:'+selected_lineheight+'}'
         }
-        console.log($('.output_elem_child'))
         document.getElementsByTagName('head')[0].appendChild(style);
     }
     function reset_size_sentence(elem){
     var style = window.getComputedStyle(elem, null).getPropertyValue('font-size');
     var fontSize = parseFloat(style); 
-
-    console.log(elem.style.fontSize)
-    console.log(elem.offsetWidth)
         if( selected_ratio === '1-1'){
             if((elem.offsetWidth > 350) ||(elem.offsetHeight > 350)){
                 elem.style.fontSize = (fontSize - 5) + 'px';
@@ -256,7 +299,6 @@ var multi_lang_array = [
         }else{
             if((elem.offsetWidth > 477.5) ||(elem.offsetHeight > 250)){
                 elem.style.fontSize = (fontSize - 5) + 'px';
-                console.log(elem.style.fontSize)
                 reset_size_sentence(elem)
             }
         }
@@ -270,68 +312,21 @@ var multi_lang_array = [
         var f = fonts.items[fontIndex];
         var family = fonts.items[fontIndex].family
         var var_index
-        if(variant === 'regular'){
-            for (var i = f.variants.length - 1; i >= 0; i--) {
-                if(f.variants[i] === 'regular'){
-                    var_index = i
-                    var v = f.variants[var_index];
-                    var url = f.files[v].substring(5); 
-                    load_type(url,family,text, text_2,text_3,text_4)
-                    return false
-                }else if(f.variants[i] === '300'){
-                    var_index = i
-                    var v = f.variants[var_index];
-                    var url = f.files[v].substring(5); 
-                    load_type(url,family,text, text_2,text_3,text_4)
-                    return false
-                }else{
-                    var_index = 0
-                    var v = f.variants[var_index];
-                    var url = f.files[v].substring(5); 
-                    load_type(url,family,text, text_2,text_3,text_4)
-                    return false
-                }
-            }
-        }
-        if(variant === 'italic'){
-            for (var i = f.variants.length - 1; i >= 0; i--) {
-                if(f.variants[i] === 'italic'){
-                    var_index = i
-                    var v = f.variants[var_index];
-                    var url = f.files[v].substring(5); 
-                    load_type(url,family,text, text_2,text_3,text_4)
-                    return false
-                }else if(f.variants[i].includes("italic")){
-                    var_index = i
-                    var v = f.variants[var_index];
-                    var url = f.files[v].substring(5); 
-                    load_type(url,family,text, text_2,text_3,text_4)
-                    return false
-                }else if(f.variants[i].includes("i")){
-                    var_index = i
-                    var v = f.variants[var_index];
-                    var url = f.files[v].substring(5); 
-                    load_type(url,family,text, text_2,text_3,text_4)
-                    return false
-                }else{
-                    failed_load_type()
-                    return false
-                }
-            }
-        }
+                var url = f.files[variant]
+                load_type(url,family,text, text_2,text_3,text_4)
     }
 
 
     function load_type(url,family,text,text_2,text_3,text_4){
             opentype.load(url, function (err, font) {
                 if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'character'){
-                var textModel = new makerjs.models.Text(font, text, 300, true, true, undefined);
-                var svg = makerjs.exporter.toSVG(textModel);
+                    var textModel = new makerjs.models.Text(font, text, 300, true, true, undefined);
+                    var svg = makerjs.exporter.toSVG(textModel);
                 }else if($('#content_wrapper>.selected').attr('id').split('_')[1] === 'sentence'){
-                        var svg = text
+                    var svg = text
                 }else{
-                var textModel = new makerjs.models.Text(font, text, 100, true, true, undefined);
-                var svg = makerjs.exporter.toSVG(textModel);
+                    var textModel = new makerjs.models.Text(font, text, 100, true, true, undefined);
+                    var svg = makerjs.exporter.toSVG(textModel);
                 }
 
                 var output_wholewrap = document.createElement("div");
@@ -425,7 +420,6 @@ var multi_lang_array = [
 
 
                 }else{
-                    console.log($('#content_wrapper>.selected').attr('id').split('_')[1])
 
         var divs_array = document.getElementsByClassName('svg_wrapper')
         for (var j = divs_array.length - 1; j >= 0; j--) {
@@ -565,7 +559,6 @@ function reset_size(output){
             var svg_wrapper = document.getElementsByClassName('svg_wrapper')  
             for (var i = svg_wrapper.length - 1; i >= 0; i--) {
                 if(svg_wrapper[i].children[0].classList.contains('svg_wrapper_inner')){}else{
-                    console.log(svg_wrapper[i].children[0].classList)
                     org_html = svg_wrapper[i].innerHTML;
                     new_html = "<div class='svg_wrapper_inner'>" + org_html + "</div>";
                     svg_wrapper[i].innerHTML = new_html;    
@@ -617,7 +610,6 @@ function reset_size(output){
     function divtoimage(a_counter){
         var svg_wrapper = document.getElementsByClassName("svg_wrapper")
         var svg_wholewrapper = document.getElementsByClassName("svg_wholewrapper")
-        console.log(a_counter)
         // for (var i = svg_wrapper.length - 1; i >= 0; i--) {
             // if(1-1)
             var i_top = svg_wrapper[a_counter].getBoundingClientRect().top + window.scrollY;
@@ -665,7 +657,6 @@ function reset_size(output){
                             width: 573,
                             height: 300
                         }).then(function(canvas, i) {
-                            console.log(a_counter)
                             // var a = svg_wholewrapper[counter].getElementsByTagName('a')[0]
                             a.href = canvas.toDataURL("image/png");
                             a.download = a.id;
@@ -714,7 +705,6 @@ function reset_size(output){
                             width: 286.5,
                             height: 150
                         }).then(function(canvas, i) {
-                            console.log(a_counter)
                             // var a = svg_wholewrapper[counter].getElementsByTagName('a')[0]
                             a.href = canvas.toDataURL("image/png");
                             a.download = a.id;
@@ -739,17 +729,17 @@ function reset_size(output){
 
     // }
         var all_selected = false
-            $('#selectall').click(function(){
-                if(all_selected){
-                    $('#objectlist_wrapper input[type="checkbox"]').prop('checked', false);
-                    $('#selectall').html('Select All')
-                    all_selected = false
-                }else{
-                    $('#objectlist_wrapper input[type="checkbox"]').prop('checked', true);
-                    $('#selectall').html('Deselect All')
-                    all_selected = true
-                }
-            });
+            // $('#selectall').click(function(){
+            //     if(all_selected){
+            //         $('#objectlist_wrapper input[type="checkbox"]').prop('checked', false);
+            //         $('#selectall').html('Select All')
+            //         all_selected = false
+            //     }else{
+            //         $('#objectlist_wrapper input[type="checkbox"]').prop('checked', true);
+            //         $('#selectall').html('Deselect All')
+            //         all_selected = true
+            //     }
+            // });
 
 };
     

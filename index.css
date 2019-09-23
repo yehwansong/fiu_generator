@@ -2,16 +2,18 @@ body, div, input, select, button {
     font-family: 'Roboto', sans-serif;
     margin: 0
 }
-#objectlist_wrapper{
+#objectlist_wrapper {
+    box-sizing: border-box;
+    display: inline-block;
     padding-left: 20px;
-    height: 100%;
+    height: 100vh;
     overflow: scroll;
     overflow-x: hidden;
     width: 200px;
-    background: #c8cacd;
-    /* border-bottom: 1px solid rgba(0,0,0,.6); */
+    background: #e0e0e0;
     position: fixed;
-    left: 320px;
+    float: left;
+    left: 0;
 }
 svg{
     -webkit-transform: translateY(-50%) translateX(-50%);
@@ -63,44 +65,46 @@ svg{
     padding-top: 25px;
 }
 #output_wrapper{
-    left: 540px;
-    position: absolute;
+    left: 810px;
+    /* display: inline-block; */
+    /* float: left; */
+    float: left;
+    /* left: 540px; */
+    position: relative;
     top: 0;
+    width: calc(100vw - 810px);
 }
-#g_wrapper{
+#g_wrapper {
     top: auto;
     bottom: 0;
-
     /* width: 120px; */
     height: 30px;
-    width: 220px;
-    left: 320px;
+    width: 610px;
+    left: 200px;
     position: fixed;
-    height: 195px;
-    background: #f1f1f1}
+    height: 60px;
+    background: #ff5252;
+    z-index: 1000000000;
+}
 #generate{
-    left: 50px;
+    /* left: 50px; */
     position: absolute;
-    top: 35px;
-    width: 120px;
-    height: 30px;
+    /* top: 35px; */
+    width: 100%;
+    height: 100%;
     font-size: 17px;
     border-radius: 3px;
+    background: none;
+    border: none;
 }
 #imagesize_wrapper{
-    position: fixed;
-    background: #808080;
+    /*position: fixed;*/
     bottom: 0;
     height: 100px;
     top: auto;
 }
-#ratio_wrapper{
-    position: fixed;
+#ratio_wrapper {
     z-index: 100000;
-    height: 95px;
-    top: auto;
-    bottom: 100px;
-    background: #808080;
     overflow: visible;
 }
 .wrapper>div{
@@ -112,41 +116,63 @@ svg{
 	background: #ff5252;
 }
 .selected{
-    box-shadow: 0px 0px 10px #4a4a4a
+    box-shadow: 0px 0px 0px 4px #dcdcdc, 0px 0px 0px 5px #1a1a1a
 }
 
 
 
-#wrapper_wrapper{
+#wrapper_wrapper {
+    background: #e0e0e0;
+    position: fixed;
+    float: left;
+    width: 610px;
     overflow-y: auto;
     overflow-x: hidden;
-    position: fixed;
     left: 0;
     top: 0;
-    width: 320px;
-    height: calc(100vh - 195px);
-    background: #dadce0;
+    height: calc(100vh - 60px);
+    left: 200px;
 }
-.wrapper{
+.wrapper {
+    border-top: 1px solid #cecece;
     position: relative;
-    padding-left: 10px;
+    margin-left: 10px;
     overflow: hidden;
-    width: 310px;
+    width: 600px;
     left: 0;
     top: 0;
-    background: #dadce0;
     display: block;
+    float: left;
+    float: left;
+}
+.sub_wrap{float: left;
+    width: 310px;
+    overflow: hidden;}
+#option_wrapper{
+    overflow-y: scroll;
+    height: 100vh;
+    background: #f1f1f1;
+    display: inline-block;
+    flex-wrap: wrap;
+    display: flex;
+    width: 630px;
+    float: left;
 }
 #theme_wrapper{
-    height: 95px;
 }
 #color_wrapper{
-    height: 165px;
     /*top: 95px;*/
 }
 #variant_wrapper{
-    height: 95px;
+    height: auto;
     /*top: 260px;*/
+}
+#variant_wrapper>span,
+#variant_900italic{
+    margin-bottom: 10px !important
+}
+#variant_wrapper>div:hover{
+    background: gray
 }
 #content_wrapper{
     /*height: 100vh;*/
@@ -161,17 +187,82 @@ svg{
     border-bottom: 2px solid white;
     left: 6%;
 }
-#variant_italic{
-    font-style: italic;
-    font-size: 50px;
-    line-height: 1;
-    text-align: center;
+#variant_wrapper>div{
+    opacity: 0.5;
+    /* top: 260px; */
+    width: 220px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background: white;
+    height: 30px !important;
+    font-size: 28px;
+    pointer-events: none;s
+}
+#variant_100{
+font-weight:100;
+}
+#variant_100italic{
+font-weight:100;
+font-style:italic;
+}
+#variant_200{
+font-weight:200;
+}
+#variant_200italic{
+font-weight:200;
+font-style:italic;
+}
+#variant_300{
+font-weight:300;
+}
+#variant_300italic{
+font-weight:300;
+font-style:italic;
 }
 #variant_regular{
-    font-size: 50px;
-    line-height: 1;
-    text-align: center;
 }
+#variant_italic{
+font-style:italic;
+}
+#variant_500{
+font-weight:500;
+}
+#variant_500italic{
+font-weight:500;
+font-style:italic;
+}
+#variant_600{
+font-weight:600;
+}
+#variant_600italic{
+font-weight:600;
+font-style:italic;
+}
+#variant_700{
+font-weight:700;
+}
+#variant_700italic{
+font-weight:700;
+font-style:italic;
+}
+#variant_800{
+font-weight:800;
+}
+#variant_800italic{
+font-weight:800;
+font-style:italic;
+}
+#variant_900{
+font-weight:900;
+}
+#variant_900italic{
+font-weight:900;
+font-style:italic;
+}
+
+
 #ratio_wrapper div{
     padding-top: 5px;
     text-align: center;
@@ -192,10 +283,6 @@ svg{
     font-size: 10px;
     width: 100%;
     text-align: center;
-}
-#imagesize_wrapper,
-#ratio_wrapper{
-    background: #f1f1f1
 }
 
 .character{
@@ -229,7 +316,6 @@ svg{
     opacity: 0.5;
     pointer-events: none;
     transform: scale(0.91);
-    padding-left: 40px;
     transform-origin: left top;
 }
 #lineheight_11,
@@ -272,7 +358,6 @@ svg{
 
 
 .title{
-    font-weight: 800;
     display: block;
     width: 310px !important;
     height: auto !important;

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 
   <title>Thumnailgenerator</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="index.css" />
         <script
               src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -21,14 +21,14 @@
 </head>
 
 <body>
-	<div id="wrapper_wrapper">
 		<div id="objectlist_wrapper">
 			<span class="title">Fonts</span>
-			<button id="selectall">select all</button>
+			<!-- <button id="selectall">select all</button> -->
 			<select id="font_languages">
 				<option value="all">All languages</option>
 			</select>
 		</div>
+	<div id="wrapper_wrapper">
 		<div id="theme_wrapper" class="wrapper">
 			<span class="title">theme</span>
 			<div id='theme_none' class="selected"></div>
@@ -47,8 +47,24 @@
 		</div>
 		<div id="variant_wrapper" class="wrapper">
 			<span class="title">variant</span>
-			<div id="variant_regular" class="selected">K</div>
-			<div id="variant_italic">K</div>
+					<div id="variant_100">Thin</div>
+                    <div id="variant_100italic">Thin Italic</div>
+					<div id="variant_200">Extra-Light</div>
+                    <div id="variant_200italic">Extra-Light Italic</div>
+					<div id="variant_300">Light</div>
+                    <div id="variant_300italic">Light Italic</div>
+                    <div id="variant_regular">Regular</div>
+                    <div id="variant_italic">Regular Italic</div>
+                    <div id="variant_500">Medium</div>
+                    <div id="variant_500italic">Medium Italic</div>
+                    <div id="variant_600">Semi-Bold</div>
+                    <div id="variant_600italic">Semi-Bold Italic</div>
+                    <div id="variant_700">Bold</div>
+                    <div id="variant_700italic">Bold Italic</div>
+                    <div id="variant_800">Extra-Bold</div>
+                    <div id="variant_800italic">Extra-Bold Italic</div>
+                    <div id="variant_900">Black</div>
+                    <div id="variant_900italic">Black Italic</div>
 		</div>
 		<div id="content_wrapper" class="wrapper">
 			<span class="title">Content</span>
@@ -56,6 +72,7 @@
 			<div class="character" id="content_character_0">K</div>
 			<div class="character" id="content_character_1">J</div>
 			<div class="character" id="content_character_2">L</div>
+			<div class="character" id="content_character_3">F</div>
 			
 			<span class="title">Word</span>
 			<div class="word selected" id="content_word_3">Shining</div>
@@ -98,7 +115,6 @@
 			<div id="lineheight_12">The<br>spectacle<br>before us</div>
 			<div id="lineheight_14">The<br>spectacle<br>before us</div>
 		</div>
-	</div>
 	<div id="ratio_wrapper" class="wrapper">
 		<span class="title">Image Ratio</span>
 		<div id="ratio_100-191" class="selected">1.91:1<div>Twitter</div></div>
@@ -109,6 +125,7 @@
 		<span class="title">Image Size(Height)</span>
 		<div id="imagesize_600" class="selected">600px</div>
 		<div id="imagesize_300">300px</div>
+	</div>
 	</div>
 	<div id="g_wrapper">
 		<button id="generate">Generate!</button>
