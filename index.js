@@ -312,7 +312,7 @@ var multi_lang_array = [
         var f = fonts.items[fontIndex];
         var family = fonts.items[fontIndex].family
         var var_index
-                var url = f.files[variant]
+                var url = f.files[variant].substring(5)
                 load_type(url,family,text, text_2,text_3,text_4)
     }
 
