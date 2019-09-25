@@ -2,6 +2,7 @@ body, div, input, select, button {
     font-family: 'Roboto', sans-serif;
     margin: 0
 }
+body{overflow-x: hidden;}
 #objectlist_wrapper {
     box-sizing: border-box;
     display: inline-block;
